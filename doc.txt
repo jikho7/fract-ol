@@ -1,0 +1,21 @@
+prototype n functions:
+int	mlx_pixel_put(void *mlx_ptr, void *win_ptr, int x, int y, int color);
+void	*mlx_new_window(void *mlx_ptr,int size_x,int size_y,char *title);
+
+int	encode_rgb(uint8_t red, uint8_t green, uint8_t blue)
+{
+	return (red << 16 | green << 8 | blue);
+}
+
+
+Bases:
+x, y. it is considered that the top left corner of the screen is the origin (x = 0, y = 0).
+
+Let's consider a common screen resolution, that is 1920x1080.
+x = colonnes, y = ligne (nbr pixel)
+In this case, that means that there's 1080 rows of pixels on the screen, and that
+each row has 1920 pixels. The y axis is used to represent the row number, while
+the x axis is used to represent the column number.
+
+int handle_keypress(int keysm, t_data *data)
+int render(t_data *data)
