@@ -8,7 +8,8 @@ NAME	= fractol
 ##
 #Sources
 
-SRCS	= fractol.c
+SRCS	=	fractol.c\
+			##utils_fracto.c\
 
 OBJS	= ${SRCS:%.c=%.o}
 CFLAGS	= -Werror -Wall -Wextra -g
