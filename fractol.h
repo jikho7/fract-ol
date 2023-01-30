@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:41:09 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/01/17 18:48:35 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/01/30 17:06:37 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,43 @@
 # include <math.h>
 # include <complex.h>
 
-# define WINDOW_WIDTH 1000
-# define WINDOW_HEIGHT 1000
-# define MULTI 2
+# define WID 500
+# define HEI 500
 # define MOUSEMOVE 6
 //# define MOUSEPRESS 4
 //# define MOUSERELEASE 5
 # define KEYPRESS 2
 # define KEYRELEASE 3
+//# define ON_DESTROY 17
 # define RED 0xDC143C
 # define BLUE 0x87CEEB
 # define GREEN 0x90EE90
+
+typedef struct scaled
+{
+	int scaled_x;
+	int scaled_y;
+	int scaled_width;
+	int scaled_height;
+}	t_scaled;
+
+typedef struct s_fra
+{
+	double x;
+	double y;
+	double height;
+	double width;
+	double row;
+	double col;
+	double c_r;
+	double c_i;
+	double x_new;
+	int color;
+	double z;
+	double l_r;
+	double u_d;
+	int i;
+}	t_fra;
 
 typedef struct s_center
 {
@@ -63,6 +89,9 @@ typedef struct s_data
 	t_img		img;
 	t_square	square;
 	t_center	center;
+	t_fra		fra;
+	int			x;
+	int			y;
 }	t_data;
 
 void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
@@ -78,5 +107,6 @@ int		render_background(t_img *img, int color);
 int		render(t_data *data);
 int		empty_square(t_img *img, t_square square);
 int		ft_center(int *x, int *y);
+int		julia(t_img *img, t_fra fra, t_data *data);
 
 #endif
