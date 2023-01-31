@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:41:09 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/01/31 17:53:28 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/01 00:39:47 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include <stdlib.h>
 # include <math.h>
 # include <complex.h>
-# include "Libft/libft.h"
+# include "libft/libft.h"
 
 # define WID 500
 # define HEI 500
@@ -30,31 +30,22 @@
 
 typedef struct s_fra
 {
-	double x;
-	double y;
-	double height;
-	double width;
-	double row;
-	double col;
-	double c_r;
-	double c_i;
-	double x_new;
-	int color;
-	double z;
-	double l_r;
-	double u_d;
-	int i;
-	double multi_ju;
+	double	x;
+	double	y;
+	double	height;
+	double	width;
+	double	row;
+	double	col;
+	double	c_r;
+	double	c_i;
+	double	new;
+	int		c;
+	double	z;
+	double	l_r;
+	double	u_d;
+	int		i;
+	double	multi;
 }	t_fra;
-
-typedef struct s_square
-{
-	int	x;	// square's upper side corner
-	int	y;	// square's upper side corner
-	int width;
-	int height;
-	int color;
-}	t_square;
 
 typedef struct s_img
 {
@@ -70,22 +61,25 @@ typedef struct s_data
 	void		*mlx;
 	void		*mlx_win;
 	t_img		img;
-	t_square	square;
 	t_fra		fra;
 	int			x;
 	int			y;
 	char**		av1;
+	int			len;
+	int			check;
+
 }	t_data;
 
-int mouse_controls(int mousecode, int x, int y, t_data *data);
-int ft_center_f(double *x, double *y);
-int mandelbrot(t_img *img, t_fra fra, t_data *data);
-int conversion(double *x, double *y);
-int ft_center(int *x, int *y);
-int julia(t_img *img, t_fra fra, t_data *data);
-int render(t_data *data);
-void t_img_ft_mlx_pixel_put(t_img *img, int x, int y, int color);
-int handle_input(int keycode, t_data *data);
-int render(t_data *data);
+int		main(int ac, char**av);
+int		mouse_controls(int mousecode, int x, int y, t_data *data);
+int		handle_input(int keycode, t_data *data);
+int		render(t_data *data);
+int		fra_strlen(const char *s);
+int		fra_strncmp(const char *s1, const char *s2, size_t n);
+void	pixel_put(t_img *img, int x, int y, int color);
+int		mandelbrot(t_img *img, t_fra fra, t_data *data);
+int		julia(t_img *img, t_fra fra, t_data *data);
+int		burning_ship(t_img *img, t_fra fra);
+void	reject(void);
 
 #endif
