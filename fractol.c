@@ -6,12 +6,13 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:05:01 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/01/31 17:54:36 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/01/31 20:54:21 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 # include "mlx/mlx.h"
+
 
 int mouse_controls(int mousecode, int x, int y, t_data *data);
 int mandelbrot(t_img *img, t_fra fra, t_data *data);
@@ -20,48 +21,67 @@ int	mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
 int julia(t_img *img, t_fra fra, t_data *data);
 int ft_center(int *x, int *y);
 int burning_ship(t_img *img, t_fra fra, t_data *data);
-int	ft_atoi(const char *str);
+int	fra_strncmp(const char *s1, const char *s2, size_t n);
+size_t	ft_strlen(const char *s);
 
-int main(int argc, char**av)
+int main(int ac, char**av)
 {
-	(void)argc;
-
-	printf("Entrer type de fractal et un nombre.");
-	printf("%s", av[1]);
+	(void)av;
 	t_data	data;
-	data.av1 = &av[1];
-	data.fra =(t_fra){0, 0, 0, 0, 0, 0, 0, 0, 0, 0xAABFD1, 1, 1, 1, 0, -2};
-	data.mlx = mlx_init();
-	if(data.mlx == NULL)
-		write(1, "error", 5);
-	data.mlx_win = mlx_new_window(data.mlx, WID, HEI, "Fractal");
-	data.img.img_ptr = mlx_new_image(data.mlx, WID, HEI);
-	data.img.addr = mlx_get_data_addr(data.img.img_ptr, &data.img.bpp, &data.img.line_len, &data.img.endian);
 
-	mlx_mouse_hook(data.mlx_win, &mouse_controls, &data);
-	mlx_key_hook(data.mlx_win, &handle_input, &data);
-	mlx_loop_hook(data.mlx, &render, &data);
-	mlx_loop(data.mlx);
+	if(ac == 1)
+	{
+		printf("Fractals:\n-> mandelbrot\n-> julia\n-> burning_ship\n");
+		exit(0);
+	}
+	else
+	{
+		data.av1 = &av[1];
+		//printf("%s\n", data.av1[0]);
+		//data = (t_data){0, 0, 0, 0, 0, 0, &av[1], &av[2], &av[3]};
+		data.fra =(t_fra){0, 0, 0, 0, 0, 0, 0, 0, 0, 0xAABFD1, 1, 1, 1, 0, -2};
+		data.mlx = mlx_init();
+		if(data.mlx == NULL)
+			write(1, "error", 5);
+		data.mlx_win = mlx_new_window(data.mlx, WID, HEI, "Fractal");
+		data.img.img_ptr = mlx_new_image(data.mlx, WID, HEI);
+		data.img.addr = mlx_get_data_addr(data.img.img_ptr, &data.img.bpp,
+		&data.img.line_len, &data.img.endian);
 
-	//if(mlx_destroy_window(data.mlx, data.mlx_win))
-	//	exit(0);
-	//free(data.mlx);
+		mlx_mouse_hook(data.mlx_win, &mouse_controls, &data);
+		mlx_key_hook(data.mlx_win, &handle_input, &data);
+		mlx_loop_hook(data.mlx, &render, &data);
+		mlx_loop(data.mlx);
+	}
 	return (0);
-
+	// burning_ship(&data->img, data->fra, data);
+	// mandelbrot(&data->img, data->fra, data);
+	// julia(&data->img, data->fra, data);
 //int		mlx_mouse_get_pos(void *win_ptr, int *x, int *y);
 }
 
 int render(t_data *data)
 {
+	int check;
+	int len;
+
+	len = ft_strlen(*data->av1);
+	check = fra_strncmp(*data->av1, "julia", 5);
 	if (data->mlx_win == NULL)
 		exit(0);
-	if(ft_atoi(*data->av1) == ft_atoi("burning_ship"))
-		burning_ship(&data->img, data->fra, data);
-	if(ft_atoi(*data->av1) == ft_atoi("mandelbrot"))
-		mandelbrot(&data->img, data->fra, data);
-	if(ft_atoi(*data->av1) == ft_atoi("julia"))
+	if(check == 0 && len == 5)
 		julia(&data->img, data->fra, data);
-
+	check = fra_strncmp(*data->av1, "mandelbrot", 10);
+	if(check == 0 && len == 10)
+		mandelbrot(&data->img, data->fra, data);
+	check = fra_strncmp(*data->av1, "burning_ship", 12);
+	if(check == 0 && len == 12)
+		burning_ship(&data->img, data->fra, data);
+	else
+	{
+		printf("Fractals:\n-> mandelbrot\n-> julia\n-> burning_ship\n");
+		exit(0);
+	}
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
 	return (0);
 }
@@ -202,41 +222,6 @@ int julia(t_img *img, t_fra fra, t_data *data)
 	return(0);
 }
 
-/*
-
-int render_triangle(t_img *img, t_square square)
-{
-	int y;
-	int x;
-	int t;
-	int move;
-
-
-    square.x = ((((WID / 2) - (WID / 2.0)) * 4.0) / WID);
-    square.y = ((((HEI / 2)- (HEI / 2.0)) * 4.0) / HEI);
-
-	t = square.width;		//	500
-	//square.x = WID / 2;
-	//square.y = HEI / 2;
-	//square.y = HEI / 2;
-	y = square.y;
-	move = square.x;
-	while (y < square.y + square.height )
-	{
-		x = move;
-		while (x < (square.x + (square.width) - t) ) // x < 250 + 500 - 499 = 251 -- 249 < 249 + 500 - 498 = 251
-		{
-			t_img_ft_mlx_pixel_put(img, x, y, square.color);
-			x++;
-		}
-		move--;
-		t--;
-		y++;
-	}
-	return (0);
-}
-*/
-
 int burning_ship(t_img *img, t_fra fra, t_data *data)
 {
 	(void)data;
@@ -269,81 +254,27 @@ int burning_ship(t_img *img, t_fra fra, t_data *data)
 	return(0);
 }
 
-/*
-ft()
+int	fra_strncmp(const char *s1, const char *s2, size_t n)
+  {
+  	unsigned int	i;
+
+  	i = 0;
+  	while ((s1[i] != '\0' || s2[i] != '\0') && i < n)
+  	{
+  		if (s1[i] != s2[i])
+  			return (1);
+  		i++;
+  	}
+  	return (0);
+  }
+
+size_t	ft_strlen(const char *s)
 {
-	for (int row = 0; row < height; row++)
-	{
-    	for (int col = 0; col < width; col++)
-		{
-        	double c_re = (col - width/2.0)*4.0/width;
-        	double c_im = (row - height/2.0)*4.0/width;
-        	double x = 0, y = 0;
-        	int iteration = 0;
-        	while (x*x+y*y <= 4 && iteration < max)
-			{
-            	double x_new = x*x - y*y + c_re;
-            	y = 2*x*y + c_im;
-            	x = x_new;
-            	iteration++;
-        	}
-        	if (iteration < max) putpixel(col, row, white);
-        	else putpixel(col, row, black);
-   	 	}
-	}
-return(0);
-}
-*/
+	size_t	i;
 
-
-/*
-int mandelbrot(t_img *img, t_frac frac, t_data *data)
-{
-	int it;
-	scaled_mandelbrot (&frac);
-	//printf("%d\n", frac.ptr_x);
-	//printf("%d\n", frac.ptr_y);
-	frac.width = frac.ptr_x;
-	frac.height = frac.ptr_y;
-	while (frac.row < frac.height)	// == i(0) < win_hei
-	{
-		frac.col = 0; // AJOUT
-		while (frac.col < frac.width)	//== j(0) < win_wid
-		{
-       		frac.c_real = ((frac.col - (frac.ptr_x/2.0))*4.0)/frac.ptr_x;	//c = (0 - 500/2)*4/500 = -250*4/500 = -2
-        	frac.c_imagi = ((frac.row - (frac.ptr_y/2.0))*4.0)/frac.ptr_x;	//c = (0 - 500/2)*4/500
-			frac.x = 0;
-			frac.y = 0;
-        	while ((frac.x * frac.x)+(frac.y * frac.y) <= 4 && it < 400)	//x^ + y^ <= 4
-			{
-            	frac.x_new = (frac.x * frac.x) - (frac.y * frac.y) + frac.c_real;	//x,y = 1/ n_new = 0 + -2/ x_new = -2
-            	frac.y = (2 * frac.x * frac.y) + frac.c_imagi;	//x,y = 1/ 2 + -2/ y = 0
-            	frac.x = frac.x_new;
-            	it++;
-        	}
-			if (it < 400)
-				t_img_ft_mlx_pixel_put(img, frac.col, frac.row, frac.color + (it * 11));
-        	else
-				t_img_ft_mlx_pixel_put(img, frac.col, frac.row, 0x00000000);
-			frac.col++;
-			it = 0;
-		}
-		frac.row++;
-	}
-	return(0);
-}
-*/
-
-
-int	handle_no_event(void *base)
-{
-	(void)base;
-	return (0);
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	return (i);
 }
 
- int conversion(double *x_width, double *y_height)
- {
-	*x_width = -2 + (*x_width / WID) * 4;
-	*y_height = 2 + (*y_height / HEI) * 4;
-	return (0);
- }
