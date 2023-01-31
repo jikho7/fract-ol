@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:41:09 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/01/30 17:06:37 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/01/31 17:53:28 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,26 +19,14 @@
 # include <stdlib.h>
 # include <math.h>
 # include <complex.h>
+# include "Libft/libft.h"
 
 # define WID 500
 # define HEI 500
-# define MOUSEMOVE 6
-//# define MOUSEPRESS 4
-//# define MOUSERELEASE 5
-# define KEYPRESS 2
-# define KEYRELEASE 3
-//# define ON_DESTROY 17
 # define RED 0xDC143C
 # define BLUE 0x87CEEB
 # define GREEN 0x90EE90
-
-typedef struct scaled
-{
-	int scaled_x;
-	int scaled_y;
-	int scaled_width;
-	int scaled_height;
-}	t_scaled;
+# define COLOR 0xAABFD1
 
 typedef struct s_fra
 {
@@ -56,13 +44,8 @@ typedef struct s_fra
 	double l_r;
 	double u_d;
 	int i;
+	double multi_ju;
 }	t_fra;
-
-typedef struct s_center
-{
-	int x;
-	int y;
-}	t_center;
 
 typedef struct s_square
 {
@@ -88,25 +71,21 @@ typedef struct s_data
 	void		*mlx_win;
 	t_img		img;
 	t_square	square;
-	t_center	center;
 	t_fra		fra;
 	int			x;
 	int			y;
+	char**		av1;
 }	t_data;
 
-void	ft_mlx_pixel_put(t_data *data, int x, int y, int color);
-int		key_hook(int keycode, t_data *data);
-int		close_window(int keycode, t_data *var);
-int		handle_no_event(void *base);
-int		handle_input(int keycode, t_data *data);
-int		write_keycode(int keycode, t_data *var);
-int		empty_square(t_img *img, t_square square);
-void	t_img_ft_mlx_pixel_put(t_img *img, int x, int y, int color);
-int		render_square(t_img *img, t_square square);
-int		render_background(t_img *img, int color);
-int		render(t_data *data);
-int		empty_square(t_img *img, t_square square);
-int		ft_center(int *x, int *y);
-int		julia(t_img *img, t_fra fra, t_data *data);
+int mouse_controls(int mousecode, int x, int y, t_data *data);
+int ft_center_f(double *x, double *y);
+int mandelbrot(t_img *img, t_fra fra, t_data *data);
+int conversion(double *x, double *y);
+int ft_center(int *x, int *y);
+int julia(t_img *img, t_fra fra, t_data *data);
+int render(t_data *data);
+void t_img_ft_mlx_pixel_put(t_img *img, int x, int y, int color);
+int handle_input(int keycode, t_data *data);
+int render(t_data *data);
 
 #endif
