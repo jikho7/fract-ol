@@ -1,17 +1,29 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/02/01 17:17:52 by jdefayes          #+#    #+#              #
+#    Updated: 2023/02/01 17:18:20 by jdefayes         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 ###############
 ##
 #Arguments
-
 NAME	= fractol
 
 ###############
 ##
 #Sources
-
 SRCS	=	fractol.c\
-			##utils_fracto.c\
+			fractales.c\
+			hooks.c\
+			main.c\
 
-OBJS	= ${SRCS:%.c=%.o}
+OBJS	= ${SRCS:.c=.o}
 CFLAGS	= -Werror -Wall -Wextra -g
 CC		= gcc
 RM		= rm -f
@@ -40,5 +52,4 @@ fclean: clean
 re: fclean all
 
 .PHONY: all clean fclean re
-
 

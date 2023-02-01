@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:22:14 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 00:25:15 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/01 17:16:54 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,7 @@ int	mandelbrot(t_img *img, t_fra fra, t_data *data)
 				fra.x = fra.new;
 				fra.i++;
 			}
-			if (fra.i < 400)
-				pixel_put(img, fra.col, fra.row, fra.c + (fra.i * 9));
-			else
-				pixel_put(img, fra.col, fra.row, 0x00000000);
+			set_color (&fra, img);
 		}
 	}
 	return (0);
@@ -54,17 +51,14 @@ int	julia(t_img *img, t_fra fra, t_data *data)
 			fra.c_i = (((fra.row + fra.u_d - (HEI / 2.0)) * 4.0) / HEI / fra.z);
 			fra.i = 0;
 			while ((fra.c_r * fra.c_r) + (fra.c_i * fra.c_i)
-				<= 4 && fra.i < 300)
+				<= 4 && fra.i < 400)
 			{
 				fra.new = (fra.c_r * fra.c_r) - (fra.c_i * fra.c_i) + fra.multi;
 				fra.c_i = 2 * fra.c_r * fra.c_i + fra.multi;
 				fra.c_r = fra.new;
 				fra.i++;
 			}
-			if (fra.i == 300)
-				pixel_put(img, fra.col, fra.row, 0x00000000);
-			else
-				pixel_put(img, fra.col, fra.row, fra.c + (fra.i * 29.5));
+			set_color(&fra, img);
 		}
 	}
 	return (0);
@@ -90,10 +84,7 @@ int	burning_ship(t_img *img, t_fra fra)
 				fra.x = fra.new;
 				fra.i++;
 			}
-			if (fra.i < 400)
-				pixel_put(img, fra.col, fra.row, fra.c + (fra.i * 500));
-			else
-				pixel_put(img, fra.col, fra.row, 0x00000000);
+			set_color (&fra, img);
 		}
 	}
 	return (0);
