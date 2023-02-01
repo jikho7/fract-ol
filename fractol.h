@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:41:09 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 17:16:00 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:20:18 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,10 +66,11 @@ typedef struct s_data
 	char	**av1;
 	int		len;
 	int		check;
-
+	double	z_julia;
 }	t_data;
 
 int		main(int ac, char**av);
+int		init_mlx(t_data *data);
 int		close_window(t_data *data);
 
 int		mouse_controls(int mousecode, int x, int y, t_data *data);

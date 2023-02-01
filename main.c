@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:21:04 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 17:16:47 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:23:15 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,9 @@ int	main(int ac, char**av)
 	else
 	{
 		data.av1 = &av[1];
+		data.z_julia = 1;
 		data.fra = (t_fra){0, 0, 0, 0, 0, 0, 0, 0, 0, 0xffffff, 1, 1, 1, 0, -2};
-		data.mlx = mlx_init();
-		if (data.mlx == NULL)
-			write(1, "error", 5);
-		data.mlx_win = mlx_new_window(data.mlx, WID, HEI, "Fractales");
-		data.img.img_ptr = mlx_new_image(data.mlx, WID, HEI);
-		data.img.addr = mlx_get_data_addr(data.img.img_ptr, &data.img.bpp,
-				&data.img.line_len, &data.img.endian);
+		init_mlx(&data);
 		mlx_mouse_hook(data.mlx_win, &mouse_controls, &data);
 		mlx_hook(data.mlx_win, 17, 0, &close_window, &data);
 		mlx_key_hook(data.mlx_win, &handle_input, &data);
@@ -40,17 +35,4 @@ int	main(int ac, char**av)
 		mlx_loop(data.mlx);
 	}
 	return (0);
-}
-
-int	close_window(t_data *data)
-{
-	(void)data;
-	exit(0);
-	return (0);
-}
-
-void	reject(void)
-{
-	write(1, "Fractales:\n-> mandelbrot\n-> julia\n-> burning_ship\n", 50);
-	exit(0);
 }

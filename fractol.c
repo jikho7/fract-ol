@@ -6,72 +6,22 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:05:01 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 17:16:38 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:23:47 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx/mlx.h"
 
-int	render(t_data *data)
+int	init_mlx(t_data *data)
 {
-	data->len = fra_strlen(*data->av1);
-	data->check = fra_strncmp(*data->av1, "julia", 5);
-	if (data->check == 0 && data->len == 5)
-		julia (&data->img, data->fra, data);
-	else if (data->len == 10)
-	{
-		data->check = fra_strncmp(*data->av1, "mandelbrot", 10);
-		if (data->check == 0)
-			mandelbrot (&data->img, data->fra, data);
-		else
-			reject();
-	}
-	else if (data->len == 12)
-	{
-		data->check = fra_strncmp(*data->av1, "burning_ship", 12);
-		if (data->check == 0)
-			burning_ship (&data->img, data->fra);
-		else
-			reject();
-	}
-	else
-		reject();
-	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
-	return (0);
-}
-
-void	pixel_put(t_img *img, int x, int y, int color)
-{
-	char	*pixel;
-
-	if (x < WID && x > 0 && y < HEI && y > 0)
-	{
-		pixel = img->addr + (y * img->line_len + x * (img->bpp / 8));
-		*(int *)pixel = color;
-	}
-}
-
-int	set_color(t_fra *fra, t_img *img)
-{
-	if (fra->i >= 1 && fra->i < 2)
-		pixel_put(img, fra->col, fra->row, fra->c + (fra->i * 1000));
-	if (fra->i >= 2 && fra->i < 6)
-		pixel_put(img, fra->col, fra->row, fra->c + (fra->i * 2000));
-	if (fra->i >= 6 && fra->i < 10)
-		pixel_put(img, fra->col, fra->row, fra->c + (fra->i * 3000));
-	if (fra->i >= 10 && fra->i < 20)
-		pixel_put(img, fra->col, fra->row, fra->c + (fra->i * 4000));
-	if (fra->i >= 20 && fra->i < 30)
-		pixel_put(img, fra->col, fra->row, fra->c + (fra->i * 5000));
-	if (fra->i >= 30 && fra->i < 100)
-		pixel_put(img, fra->col, fra->row, fra->c + (fra->i * 5000));
-	if (fra->i >= 100 && fra->i < 400)
-		pixel_put(img, fra->col, fra->row, fra->c + (fra->i * 5000));
-	if (fra->i == 400)
-		pixel_put(img, fra->col, fra->row, 0x00000000);
-	else
-		pixel_put(img, fra->col, fra->row, fra->c + (fra->i * 1000));
+	data->mlx = mlx_init();
+	if (data->mlx == NULL)
+		write(1, "error", 5);
+	data->mlx_win = mlx_new_window(data->mlx, WID, HEI, "Fractales");
+	data->img.img_ptr = mlx_new_image(data->mlx, WID, HEI);
+	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
+			&data->img.line_len, &data->img.endian);
 	return (0);
 }
 
@@ -97,4 +47,17 @@ int	fra_strlen(const char *s)
 	while (s[i] != '\0')
 		i++;
 	return (i);
+}
+
+int	close_window(t_data *data)
+{
+	(void)data;
+	exit(0);
+	return (0);
+}
+
+void	reject(void)
+{
+	write(1, "Fractales:\n-> mandelbrot\n-> julia\n-> burning_ship\n", 50);
+	exit(0);
 }

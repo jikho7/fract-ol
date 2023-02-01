@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:37:44 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 15:11:58 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:16:34 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,10 @@ int	mouse_controls(int mousecode, int x, int y, t_data *data)
 		data->fra.z *= 1.2;
 	if (mousecode == 4 && data->fra.z > 40)
 		data->fra.z += 6;
+	if (mousecode == 4)
+		data->z_julia *= 1.2;
+	if (mousecode == 5)
+		data->z_julia *= 0.8;
 	if (mousecode == 2)
 	{
 		data->fra.u_d = 1;

@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:22:14 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 17:16:54 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/01 18:16:16 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,14 +41,15 @@ int	mandelbrot(t_img *img, t_fra fra, t_data *data)
 
 int	julia(t_img *img, t_fra fra, t_data *data)
 {
-	(void)data;
 	while (fra.row++ < WID + fra.height)
 	{
 		fra.col = 0;
 		while (fra.col++ < HEI + fra.width)
 		{
-			fra.c_r = (((fra.col + fra.l_r - (WID / 2.0)) * 4.0) / WID / fra.z);
-			fra.c_i = (((fra.row + fra.u_d - (HEI / 2.0)) * 4.0) / HEI / fra.z);
+			fra.c_r = (((fra.col + fra.l_r - (WID / 2.0)) * 4.0) / WID
+					/ data->z_julia);
+			fra.c_i = (((fra.row + fra.u_d - (HEI / 2.0)) * 4.0)
+					/ HEI / data->z_julia);
 			fra.i = 0;
 			while ((fra.c_r * fra.c_r) + (fra.c_i * fra.c_i)
 				<= 4 && fra.i < 400)
