@@ -6,7 +6,7 @@
 #    By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 17:17:52 by jdefayes          #+#    #+#              #
-#    Updated: 2023/02/06 16:39:47 by jdefayes         ###   ########.fr        #
+#    Updated: 2023/02/06 16:52:32 by jdefayes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,6 +42,8 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 all: ${NAME}
+
+bonus: ${NAME}
 
 clean:
 	$(RM) $(OBJS)

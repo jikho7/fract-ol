@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 17:05:01 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/06 16:43:25 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:31:37 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ char	*fra_itoa(int n)
 {
 	char	*dest;
 	int		size;
+	char	*temp;
 
 	size = (ft_size(n) + 1);
 	dest = malloc(sizeof(char) * size);
@@ -59,7 +60,9 @@ char	*fra_itoa(int n)
 		dest[size-- - 1] = (n % 10) + '0';
 		n = n / 10;
 	}
-	return (dest);
+	temp = dest;
+	free(dest);
+	return (temp);
 }
 
 static int	ft_size(int nb)

@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:41:09 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/06 16:31:34 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/06 18:26:32 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,8 @@
 # include <math.h>
 # include <complex.h>
 
-# define WID 500
-# define HEI 500
+# define WID 700
+# define HEI 700
 # define RED 0xDC143C
 # define BLUE 0x87CEEB
 # define GREEN 0x90EE90
