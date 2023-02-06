@@ -6,14 +6,14 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:37:44 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 18:16:34 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/06 14:46:10 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx/mlx.h"
 
-int	handle_input(int keycode, t_data *data)
+int	keyboard_input(int keycode, t_data *data)
 {
 	if (keycode == 53)
 		reject();
@@ -57,6 +57,7 @@ int	mouse_controls(int mousecode, int x, int y, t_data *data)
 		data->fra.u_d = 1;
 		data->fra.l_r = 1;
 		data->fra.z = 1;
+		data->z_julia = 1;
 	}
 	if (mousecode == 5)
 		data->fra.z *= 0.8;

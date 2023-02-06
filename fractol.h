@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:41:09 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 18:20:18 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:31:34 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,6 @@ typedef struct s_fra
 {
 	double	x;
 	double	y;
-	double	height;
-	double	width;
 	double	row;
 	double	col;
 	double	c_r;
@@ -44,6 +42,7 @@ typedef struct s_fra
 	double	u_d;
 	int		i;
 	double	multi;
+	char	*zoom;
 }	t_fra;
 
 typedef struct s_img
@@ -74,13 +73,14 @@ int		init_mlx(t_data *data);
 int		close_window(t_data *data);
 
 int		mouse_controls(int mousecode, int x, int y, t_data *data);
-int		handle_input(int keycode, t_data *data);
+int		keyboard_input(int keycode, t_data *data);
 
 int		fra_strlen(const char *s);
 int		fra_strncmp(const char *s1, const char *s2, size_t n);
 int		render(t_data *data);
 void	pixel_put(t_img *img, int x, int y, int color);
 int		set_color(t_fra *fra, t_img *img);
+char	*fra_itoa(int n);
 
 int		mandelbrot(t_img *img, t_fra fra, t_data *data);
 int		julia(t_img *img, t_fra fra, t_data *data);

@@ -6,12 +6,14 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 18:22:00 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 18:22:31 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/06 16:41:28 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fractol.h"
 #include "mlx/mlx.h"
+
+void	info_display(t_data *data);
 
 int	render(t_data *data)
 {
@@ -38,6 +40,7 @@ int	render(t_data *data)
 	else
 		reject();
 	mlx_put_image_to_window(data->mlx, data->mlx_win, data->img.img_ptr, 0, 0);
+	info_display(data);
 	return (0);
 }
 

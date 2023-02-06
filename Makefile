@@ -6,7 +6,7 @@
 #    By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/01 17:17:52 by jdefayes          #+#    #+#              #
-#    Updated: 2023/02/01 17:18:20 by jdefayes         ###   ########.fr        #
+#    Updated: 2023/02/06 16:39:47 by jdefayes         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,12 @@ NAME	= fractol
 ###############
 ##
 #Sources
-SRCS	=	fractol.c\
-			fractales.c\
+SRCS	=	main.c\
 			hooks.c\
-			main.c\
+			utils.c\
+			draw.c\
+			fractales.c\
+			window.c\
 
 OBJS	= ${SRCS:.c=.o}
 CFLAGS	= -Werror -Wall -Wextra -g

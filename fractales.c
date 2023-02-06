@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:22:14 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/01 18:16:16 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/06 15:32:59 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@
 int	mandelbrot(t_img *img, t_fra fra, t_data *data)
 {
 	(void)data;
-	while (fra.row++ < HEI + fra.height)
+	while (fra.row++ < HEI)
 	{
 		fra.col = 0;
-		while (fra.col++ < WID + fra.width)
+		while (fra.col++ < WID)
 		{
 			fra.c_r = (((fra.col + fra.l_r - (WID / 2.0)) * 4.0) / WID / fra.z);
 			fra.c_i = (((fra.row + fra.u_d - (HEI / 2.0)) * 4.0) / HEI / fra.z);
@@ -41,10 +41,10 @@ int	mandelbrot(t_img *img, t_fra fra, t_data *data)
 
 int	julia(t_img *img, t_fra fra, t_data *data)
 {
-	while (fra.row++ < WID + fra.height)
+	while (fra.row++ < WID)
 	{
 		fra.col = 0;
-		while (fra.col++ < HEI + fra.width)
+		while (fra.col++ < HEI)
 		{
 			fra.c_r = (((fra.col + fra.l_r - (WID / 2.0)) * 4.0) / WID
 					/ data->z_julia);
@@ -67,10 +67,10 @@ int	julia(t_img *img, t_fra fra, t_data *data)
 
 int	burning_ship(t_img *img, t_fra fra)
 {
-	while (fra.row++ < HEI + fra.height)
+	while (fra.row++ < HEI)
 	{
 		fra.col = 0;
-		while (fra.col++ < WID + fra.width)
+		while (fra.col++ < WID)
 		{
 			fra.c_r = (((fra.col + fra.l_r - (WID / 2.0)) * 4.0) / WID / fra.z);
 			fra.c_i = (((fra.row + fra.u_d - (HEI / 2.0)) * 4.0) / HEI / fra.z);
