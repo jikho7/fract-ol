@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/17 13:41:09 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/06 18:26:32 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/07 17:45:48 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,29 +20,25 @@
 # include <math.h>
 # include <complex.h>
 
-# define WID 700
-# define HEI 700
-# define RED 0xDC143C
-# define BLUE 0x87CEEB
-# define GREEN 0x90EE90
-# define WHITE 0xffffff
+# define WID 700 	// window width
+# define HEI 700	// window height
 
-typedef struct s_fra
+typedef struct s_fra	// structre for all fractales
 {
 	double	x;
 	double	y;
 	double	row;
-	double	col;
-	double	c_r;
-	double	c_i;
+	double	col;	//column
+	double	c_r;	//real axe coordinates
+	double	c_i;	//imaginary axe coordinates
 	double	new;
-	int		c;
-	double	z;
-	double	l_r;
-	double	u_d;
-	int		i;
-	double	multi;
-	char	*zoom;
+	int		c;		// color
+	double	z;		// zoom factor
+	double	l_r;	// left_right
+	double	u_d;	// up_down
+	int		i;		// iteration
+	double	multi;	// julia constante
+	char	*zoom;	// zoom display
 }	t_fra;
 
 typedef struct s_img
@@ -65,7 +61,7 @@ typedef struct s_data
 	char	**av1;
 	int		len;
 	int		check;
-	double	z_julia;
+	double	z_julia;	// julia zoom
 }	t_data;
 
 int		main(int ac, char**av);
