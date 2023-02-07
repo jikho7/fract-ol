@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:21:04 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/07 18:16:19 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:37:57 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	main(int ac, char**av)
 	{
 		data.av1 = &av[1];
 		data.z_julia = 1;
-		data.fra = (t_fra){0, 0, 0, 0, 0, 0, 0, 0xffffff, 1, 1, 1, 0, -2, 0};	// struct init
+		data.fra = (t_fra){0, 0, 0, 0, 0, 0, 0, 0xffffff, 1, 1, 1, 0, -2, 0};			// struct init
 		init_mlx(&data);
 
 		mlx_mouse_hook(data.mlx_win, &mouse_controls, &data);					// HOOKS PART
