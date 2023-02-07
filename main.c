@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:21:04 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/07 18:37:57 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:39:59 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@ int	main(int ac, char**av)
 		data.av1 = &av[1];
 		data.z_julia = 1;
 		data.fra = (t_fra){0, 0, 0, 0, 0, 0, 0, 0xffffff, 1, 1, 1, 0, -2, 0};			// struct init
-		init_mlx(&data);
+
+		init_mlx(&data);			// creat window, image and get image datas
 
 		mlx_mouse_hook(data.mlx_win, &mouse_controls, &data);					// HOOKS PART
 		mlx_hook(data.mlx_win, 17, 0, &close_window, &data);					// to close window properly
