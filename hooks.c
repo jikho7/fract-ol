@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 00:37:44 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/07 18:36:45 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:37:22 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int	keyboard_input(int keycode, t_data *data)
 {
-	if (keycode == 53)						// esc
+	if (keycode == 53)					// esc
 		reject();
 
 	if (keycode == 124 && data->fra.z < 50)			// arrows pad
