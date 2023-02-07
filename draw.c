@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/01 18:22:00 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/07 18:34:20 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:34:53 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 void	info_display(t_data *data);
 
-int	render(t_data *data)		// select and create fractal
+int	render(t_data *data)				// select and create fractal
 {
 	data->len = fra_strlen(*data->av1);
 	data->check = fra_strncmp(*data->av1, "julia", 5);
