@@ -6,7 +6,7 @@
 /*   By: jdefayes <jdefayes@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 16:38:10 by jdefayes          #+#    #+#             */
-/*   Updated: 2023/02/07 18:18:23 by jdefayes         ###   ########.fr       */
+/*   Updated: 2023/02/07 18:44:35 by jdefayes         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	init_mlx(t_data *data)
 	return (0);
 }
 
-void	info_display(t_data *data)			// display infos on the window/image
+void	info_display(t_data *data)
 {
 	data->fra.zoom = "Zoom:";
 	mlx_string_put(data->mlx, data->mlx_win, 0, 50, 0xffffff, data->fra.zoom);
